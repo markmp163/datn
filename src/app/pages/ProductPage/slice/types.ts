@@ -6,7 +6,6 @@ export interface ProductManagerState {
   listProduct: [];
   total: number;
   listCategory: [];
-  listCategoryChoosed: any;
-  price: [];
+  categoryChoosed: number;
   nameFilter: string;
 }

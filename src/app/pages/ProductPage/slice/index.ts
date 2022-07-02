@@ -14,8 +14,7 @@ export const initialState: ProductManagerState = {
   total: 0,
   listCategory: [],
   loadingCategory: false,
-  listCategoryChoosed: [],
-  price: [],
+  categoryChoosed: 0,
   nameFilter: '',
 };
 
@@ -58,21 +57,10 @@ const slice = createSlice({
     },
 
     setChoosedCategory(state, action: PayloadAction<any>) {
-      state.listCategoryChoosed = [
-        ...state.listCategoryChoosed,
-        action.payload,
-      ];
-    },
-    removeChoosedCategory(state, action: PayloadAction<any>) {
-      state.listCategoryChoosed = state.listCategoryChoosed?.filter(
-        c => c !== action.payload,
-      );
+      state.categoryChoosed = action.payload;
     },
     setNameFilter(state, action: PayloadAction<any>) {
       state.nameFilter = action.payload;
-    },
-    setPriceFilter(state, action: PayloadAction<any>) {
-      state.price = action.payload;
     },
   },
 });

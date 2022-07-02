@@ -1,9 +1,13 @@
-import { NotificationError } from 'app/components/Notification';
+import {
+  NotificationError,
+  NotificationSuccess,
+} from 'app/components/Notification';
 import { put, takeLatest } from 'redux-saga/effects';
 import { getCurrentCart } from 'services/cartServices';
 import {
   addProductToCart,
   removeProductFromCart,
+  paymentSaleOrder,
 } from 'services/saleOrderServices';
 import { getCurrentUser } from 'services/UserServices';
 import { cartManagerActions } from '.';
@@ -71,10 +75,28 @@ function* addProduct(data) {
     yield put(cartManagerActions.addNewProductFail(false));
   }
 }
+
+function* paymentSaleOrderCart(data) {
+  try {
+    const rs = yield paymentSaleOrder(data?.payload);
+    if (rs.data.rc === 0) {
+      yield put(cartManagerActions.paymentSaleOrderSuccess(false));
+      yield put(cartManagerActions.getListCart(true));
+      NotificationSuccess(rs.data.rd);
+    } else {
+      yield put(cartManagerActions.paymentSaleOrderFail(false));
+      NotificationError(rs.data.rd);
+    }
+  } catch (e) {
+    NotificationError('Error');
+    yield put(cartManagerActions.paymentSaleOrderFail(false));
+  }
+}
 export function* cartManagerSaga() {
   // yield takeLatest(actions.someAction.type, doSomething);
   yield takeLatest(cartManagerActions.getListCart, findCurrentCart);
   yield takeLatest(cartManagerActions.getUserInfo, getCurrentUserInfo);
   yield takeLatest(cartManagerActions.addNewProduct, addProduct);
   yield takeLatest(cartManagerActions.removeProduct, removerProduct);
+  yield takeLatest(cartManagerActions.paymentSaleOrder, paymentSaleOrderCart);
 }

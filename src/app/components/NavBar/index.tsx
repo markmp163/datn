@@ -76,12 +76,12 @@ export function NavBar() {
         <Popover
           content={
             <PopoverContent>
-              {authService.getAccessToken() && authService.getUsername ? (
+              {authService.getAccessToken() && authService.getUsername() ? (
                 <div>
                   <Button type="link" className="btn__options">
                     <Link to="/profile">
                       <FaUser className="iconGlobal" />
-                      {t('profile')}
+                      {authService.getUsername()}
                     </Link>
                   </Button>
                   <Button type="link" className="btn__options">

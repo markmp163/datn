@@ -3,7 +3,7 @@ import apiClient from './apiService';
 export const findProduct = async params => {
   const rs = (await apiClient.request({
     method: 'GET',
-    url: '/public/product/filter',
+    url: '/public/product',
     params: params,
   })) as any;
   return rs;

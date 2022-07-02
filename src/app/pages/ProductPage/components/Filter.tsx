@@ -1,4 +1,4 @@
-import { Button, Form, Input, InputNumber, Spin } from 'antd';
+import { Button, Form, Input, Spin } from 'antd';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,14 +10,15 @@ const Filter = () => {
   const dispatch = useDispatch();
   const { actions } = useProductManagerSlice();
   const { t } = useTranslation();
-  const { listCategory, loadingCategory, listCategoryChoosed } =
+  const { listCategory, loadingCategory, categoryChoosed } =
     useSelector(selectProductManager);
 
   const handelChooseCategory = id => {
-    if (!listCategoryChoosed?.includes(id)) {
+    if (categoryChoosed !== id) {
+      dispatch(actions.setParams({ page: 1, size: 8 }));
       dispatch(actions.setChoosedCategory(id));
     } else {
-      dispatch(actions.removeChoosedCategory(id));
+      dispatch(actions.setChoosedCategory(0));
     }
   };
 
@@ -29,17 +30,13 @@ const Filter = () => {
     }
   };
 
-  const filterPrice = value => {
-    dispatch(
-      actions.setPriceFilter([
-        value?.minPrice || Number.MIN_SAFE_INTEGER,
-        value?.maxPrice || Number.MAX_SAFE_INTEGER,
-      ]),
-    );
-  };
-
   useEffect(() => {
     dispatch(actions.findCategory(true));
+
+    return () => {
+      dispatch(actions.setChoosedCategory(0));
+      dispatch(actions.setNameFilter(''));
+    };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -63,7 +60,7 @@ const Filter = () => {
             <Button
               key={i}
               className={`btnCategory ${
-                listCategoryChoosed?.includes(c?.id) && 'choosed'
+                categoryChoosed === c?.id && 'choosed'
               }`}
               onClick={() => handelChooseCategory(c?.id)}
             >
@@ -72,24 +69,6 @@ const Filter = () => {
           ))}
         </div>
       </Spin>
-      <h2>{t('price')}</h2>
-      <div className="priceFilter">
-        <Form
-          labelCol={{ span: 6 }}
-          wrapperCol={{ span: 18 }}
-          onFinish={filterPrice}
-        >
-          <Form.Item label={t('from')} labelAlign="left" name="minPrice">
-            <InputNumber addonBefore="VND" min={0} />
-          </Form.Item>
-          <Form.Item label={t('to')} labelAlign="left" name="maxPrice">
-            <InputNumber addonBefore="VND" min={0} />
-          </Form.Item>
-          <Button htmlType="submit" className="btnSearch">
-            {t('search')}
-          </Button>
-        </Form>
-      </div>
     </Wrapper>
   );
 };
@@ -107,10 +86,11 @@ const Wrapper = styled.div`
     }
   }
   .titleSearch {
-    margin-bottom: 0px;
     &::after {
       display: none;
     }
+    border-bottom: 1px solid ${({ theme }) => theme.blackColorBlur};
+    margin-bottom: 20px;
   }
   .divSearch {
     margin-bottom: 50px;

@@ -1,6 +1,5 @@
 import Footer from 'app/components/Footer';
 import { NavBar } from 'app/components/NavBar';
-import { t } from 'i18next';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';

@@ -90,5 +90,10 @@
   "new-pass": "New password",
   "confirm-pass": "Confirm password",
   "validate-pass-mess": "The two passwords that you entered do not match!",
-  "old-password": "Old password"
+  "old-password": "Old password",
+  "your-orders": "Your orders",
+  "wait-for-confirmation": "Wait for confirmation",
+  "shipping": "Shipping",
+  "completed": "Completed",
+  "all": "All"
 }

@@ -26,6 +26,7 @@ import { ProductDetailPage } from './pages/ProductDetailPage/Loadable';
 import { AboutPage } from './pages/AboutPage/Loadable';
 import { CartPage } from './pages/CartPage/Loadable';
 import { ProfilePage } from './pages/ProfilePage/Loadable';
+import { OrdersPage } from './pages/OrdersPage/Loadable';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -50,6 +51,7 @@ export function App() {
           <Route path="/product/:id" element={<ProductDetailPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/orders" element={<OrdersPage />} />
           <Route element={<NotFoundPage />} />
         </Routes>
       </Wrapper>

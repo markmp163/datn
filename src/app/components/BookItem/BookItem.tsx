@@ -27,7 +27,7 @@ const BookItem = props => {
             {name}
           </Link>
         </Tooltip>
-        <p className="price">${price}</p>
+        <p className="price">{price}₫</p>
       </div>
       <Button className={`btnAdd ${type === 'dark' ? 'btnDark' : 'btnLight'}`}>
         <Link to={`/product/${id}`}>{t('detail')}</Link>

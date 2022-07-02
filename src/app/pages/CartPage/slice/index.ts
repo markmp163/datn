@@ -17,9 +17,11 @@ const slice = createSlice({
   initialState,
   reducers: {
     someAction(state, action: PayloadAction<any>) {},
+
     getListCart(state, action: PayloadAction<any>) {
       state.loading = action.payload;
     },
+
     getListCartSuccess(state, action: PayloadAction<any>) {
       state.loading = false;
       state.data = action.payload.item;
@@ -64,8 +66,21 @@ const slice = createSlice({
     removeProductFail(state, action: PayloadAction<any>) {
       state.loading = false;
     },
+
     setLocalCart(state, action: PayloadAction<any>) {
       state.localCart = action.payload;
+    },
+
+    paymentSaleOrder(state, action: PayloadAction<any>) {
+      state.loadingBtnPay = true;
+    },
+
+    paymentSaleOrderSuccess(state, action: PayloadAction<any>) {
+      state.loadingBtnPay = false;
+    },
+
+    paymentSaleOrderFail(state, action: PayloadAction<any>) {
+      state.loadingBtnPay = false;
     },
   },
 });

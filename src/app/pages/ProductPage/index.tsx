@@ -20,9 +20,8 @@ export function ProductPage() {
     params,
     listLoading,
     total,
-    listCategoryChoosed,
+    categoryChoosed,
     nameFilter,
-    price,
   } = useSelector(selectProductManager);
   const showTotal = () => {
     return (
@@ -33,16 +32,29 @@ export function ProductPage() {
     );
   };
   useEffect(() => {
-    dispatch(
-      actions.findProduct({
-        ...params,
-        money: price,
-        name: nameFilter,
-        category: listCategoryChoosed,
-      }),
-    );
+    if (categoryChoosed === 0) {
+      dispatch(
+        actions.findProduct({
+          ...params,
+          key: 'title',
+          // eslint-disable-next-line no-useless-concat
+          value: nameFilter && `${nameFilter}__` + 'new',
+        }),
+      );
+    } else {
+      dispatch(
+        actions.findProduct({
+          ...params,
+          key: 'title',
+          // eslint-disable-next-line no-useless-concat
+          value: nameFilter && `${nameFilter}___` + 'new',
+          categoryId: categoryChoosed,
+        }),
+      );
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params.page, params.size, price, nameFilter, listCategoryChoosed]);
+  }, [params.page, params.size, nameFilter, categoryChoosed]);
   return (
     <Wrapper>
       <Helmet>

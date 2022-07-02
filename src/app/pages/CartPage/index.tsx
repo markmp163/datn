@@ -21,9 +21,8 @@ const CartPage = () => {
     useSelector(selectCartManager);
 
   const onFinish = value => {
-    console.log(value);
+    dispatch(actions.paymentSaleOrder(value));
   };
-
   useEffect(() => {
     form.resetFields();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -66,8 +65,8 @@ const CartPage = () => {
                   key={i}
                 />
               ))}
-              {data?.length === 0 && (
-                <Empty description={'Không có sản phẩm.'} />
+              {(data?.orderItems?.length === 0 || !data?.orderItems) && (
+                <Empty description={t('no-product')} />
               )}
             </div>
           )}
@@ -84,12 +83,13 @@ const CartPage = () => {
                   key={i}
                 />
               ))}
-              {localCart?.length === 0 && (
-                <Empty
-                  description={'Không có sản phẩm.'}
-                  style={{ marginBottom: '10px' }}
-                />
-              )}
+              {localCart?.length === 0 ||
+                (!localCart && (
+                  <Empty
+                    description={t('no-product')}
+                    style={{ marginBottom: '10px' }}
+                  />
+                ))}
             </div>
           )}
 

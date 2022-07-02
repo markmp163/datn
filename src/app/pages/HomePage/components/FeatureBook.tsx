@@ -65,6 +65,7 @@ const FeatureBook = () => {
                 img={d?.images[0]?.link}
                 price={d?.price}
                 type="dark"
+                id={d?.id}
               />
             ))}
           </Slider>
@@ -86,6 +87,7 @@ const FeatureBook = () => {
                   img={d?.images[0]?.link}
                   price={d?.price}
                   type="dark"
+                  id={d?.id}
                 />
               ))}
             </Slider>

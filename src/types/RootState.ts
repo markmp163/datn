@@ -6,6 +6,7 @@ import { SignUpManagerState } from 'app/pages/SignUpPage/slice/types';
 import { ProductManagerState } from 'app/pages/ProductPage/slice/types';
 import { ProductDetailManagerState } from 'app/pages/ProductDetailPage/slice/types';
 import { ProfilePageManagerState } from 'app/pages/ProfilePage/slice/types';
+import { OrdersManagerState } from 'app/pages/OrdersPage/slice/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -23,5 +24,6 @@ export interface RootState {
   productDetailManager: ProductDetailManagerState;
   cartManager: CartManagerState;
   profilePageManager: ProfilePageManagerState;
+  ordersManager: OrdersManagerState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }

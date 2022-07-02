@@ -1,6 +1,5 @@
 import Footer from 'app/components/Footer';
 import { NavBar } from 'app/components/NavBar';
-import { NotificationError } from 'app/components/Notification';
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import styled from 'styled-components';

@@ -89,5 +89,10 @@
   "new-pass": "Mật khẩu mới",
   "confirm-pass": "Xác nhận mật khẩu",
   "validate-pass-mess": "Hai mật khẩu bạn đã nhập không khớp!",
-  "old-password": "Mật khẩu cũ"
+  "old-password": "Mật khẩu cũ",
+  "your-orders": "Đơn hàng của bạn",
+  "wait-for-confirmation": "Chờ xác nhận",
+  "shipping": "Đang vận chuyển",
+  "completed": "Đã hoàn thành",
+  "all": "Tất cả"
 }
